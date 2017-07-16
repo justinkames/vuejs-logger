@@ -1,7 +1,7 @@
 # vuejs-logger
 ![](https://travis-ci.org/justinkames/vuejs-logger.svg?branch=master)
 
-> vuejs-logger, provides customizable logging functionality for Vue.js. Compatible with Vue2.
+> Provides customizable logging functionality for Vue.js. Compatible with Vue2.
 
 ## Table of Contents
 
