@@ -65,11 +65,11 @@ new Vue({
     },
 
     created() {
-        this.$log.debug("test", this.a, 123)
-        this.$log.info("test", this.b)
-        this.$log.warn("test")
-        this.$log.error("test")
-        this.$log.fatal("test")
+        this.$log.debug('test', this.a, 123)
+        this.$log.info('test', this.b)
+        this.$log.warn('test')
+        this.$log.error('test')
+        this.$log.fatal('test')
     }
 })
 ```
