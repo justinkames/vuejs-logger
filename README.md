@@ -7,29 +7,29 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
 - [Demo](#demo)
+- [Introduction](#introduction)
 - [Install](#install)
 - [Usage](#usage)
 - [Maintainers](#maintainers)
 - [Contribute](#contribute)
 - [License](#license)
 
+## Demo
+
+@ [https://www.webpackbin.com/bins/-KpB0UbGiG2PeFDmqjwi](https://www.webpackbin.com/bins/-KpB0UbGiG2PeFDmqjwi)
 
 ## Introduction 
 
-vuejs-logger is a logging library that enables logging for Vue applications. It restricts log messages that are higher the specified log level. Features include :
+vuejs-logger is a logging library that enables logging for Vue applications. It restricts log messages that are higher than the specified log level. Features include :
 
 - Colored console messages for $log.warning, $log.error and $log.fatal.
-- Possibility to automatically JSON.stringify() the properties passed to the logger.
+- Possibility to automatically JSON.stringify() the (reactive) properties passed to the logger.
 - Possibility to display the log level in the console.
 
 ```js
 logLevels :  ['debug', 'info', 'warn', 'error', 'fatal']
 ```
-## Demo
-
-@ [https://www.webpackbin.com/bins/-KpB0UbGiG2PeFDmqjwi](https://www.webpackbin.com/bins/-KpB0UbGiG2PeFDmqjwi)
 
 ## Install
 
