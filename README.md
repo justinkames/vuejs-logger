@@ -1,6 +1,6 @@
 # vuejs-logger
 ![](https://travis-ci.org/justinkames/vuejs-logger.svg?branch=master)
-![](https://codecov.io/gh/justinkames/vuejs-logger/branch/master/graph/badge.svg)
+[![codecov](https://codecov.io/gh/justinkames/vuejs-logger/branch/master/graph/badge.svg)](https://codecov.io/gh/justinkames/vuejs-logger)
 
 > Provides customizable logging functionality for Vue.js. Compatible with Vue2.
 
