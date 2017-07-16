@@ -1,8 +1,8 @@
 {
   "name": "vuejs-logger",
   "author": "Justin Kames",
-  "version": "1.0.0",
-  "description": "Vuejs-logger, a provides logging functionality for Vue.js.",
+  "version": "1.0.1",
+  "description": "Vuejs-logger, provides customizable logging functionality for Vue.js.",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
