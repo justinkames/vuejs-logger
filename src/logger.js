@@ -41,7 +41,8 @@ export default function () {
 
     function install (Vue, options) {
         if (validateOptions(options, logLevels)) {
-            Vue.prototype.$log = initLoggerInstance(options, logLevels)
+            Vue.$log = initLoggerInstance(options, logLevels)
+            Vue.prototype.$log = Vue.$log
         } else {
             throw new Error('Provided options for vuejs-logger are not valid.')
         }

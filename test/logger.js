@@ -1,9 +1,77 @@
 import chai from 'chai'
 const expect = chai.expect
+import Vue from 'vue'
 import VueLogger from '../src/logger'
 const {print, validateOptions, initLoggerInstance, logLevels, install} = VueLogger()
 
 describe('Logger.js', () => {
+
+    describe('install()', () => {
+
+        it('install() should work with the correct params.', () => {
+            const options = {
+                logLevel: 'debug',
+                stringifyByDefault: false,
+                showLogLevel: false,
+            }
+
+            Vue.use({install}, options)
+
+            new Vue({
+                created() {
+                    expect(this.$log).to.be.a('object')
+                    expect(this.$log.debug).to.be.a('function')
+                    expect(this.$log.info).to.be.a('function')
+                    expect(this.$log.warn).to.be.a('function')
+                    expect(this.$log.error).to.be.a('function')
+                    expect(this.$log.fatal).to.be.a('function')
+                }
+            })
+
+            expect(Vue.$log).to.be.a('object')
+            expect(Vue.$log.debug).to.be.a('function')
+            expect(Vue.$log.info).to.be.a('function')
+            expect(Vue.$log.warn).to.be.a('function')
+            expect(Vue.$log.error).to.be.a('function')
+            expect(Vue.$log.fatal).to.be.a('function')
+        })
+
+        it('install() should throw an error with the an incorrect log level.', () => {
+            const options = {
+                logLevel: 'foo'
+            }
+            expect(() => { install(() => {}, options) })
+              .to
+              .throw(Error, 'Provided options for vuejs-logger are not valid.')
+        })
+
+        it('install() should throw an error with the an incorrect log level.', () => {
+            const options = {
+                logLevel: false
+            }
+            expect(() => { install(() => {}, options) })
+              .to
+              .throw(Error, 'Provided options for vuejs-logger are not valid.')
+        })
+
+        it('install() should throw an error with the an incorrect log level.', () => {
+            const options = {
+                logLevel: undefined
+            }
+            expect(() => { install(() => {}, options) })
+              .to
+              .throw(Error, 'Provided options for vuejs-logger are not valid.')
+        })
+
+        it('install() should throw an error with the an incorrect log level.', () => {
+            const options = {
+                logLevel: null
+            }
+            expect(() => { install(() => {}, options) })
+              .to
+              .throw(Error, 'Provided options for vuejs-logger are not valid.')
+        })
+    })
 
     describe('initLoggerInstance()', () => {
 
@@ -69,63 +137,6 @@ describe('Logger.js', () => {
 
         it('print() should use console.log() with any other logLevel', () => {
             print('debug', 'debug |', ['test'])
-        })
-    })
-
-    describe('install()', () => {
-
-        it('install() should work with the correct params.', () => {
-            const Vue = () => {}
-            const options = {
-                logLevel: 'debug',
-                stringifyByDefault: false,
-                showLogLevel: false,
-            }
-            install(Vue, options)
-            Vue()
-
-            expect(Vue.prototype.$log).to.be.a('object')
-            expect(Vue.prototype.$log.debug).to.be.a('function')
-            expect(Vue.prototype.$log.info).to.be.a('function')
-            expect(Vue.prototype.$log.warn).to.be.a('function')
-            expect(Vue.prototype.$log.error).to.be.a('function')
-            expect(Vue.prototype.$log.fatal).to.be.a('function')
-        })
-
-        it('install() should throw an error with the an incorrect log level.', () => {
-            const options = {
-                logLevel: 'foo'
-            }
-            expect(() => { install(() => {}, options) })
-              .to
-              .throw(Error, 'Provided options for vuejs-logger are not valid.')
-        })
-
-        it('install() should throw an error with the an incorrect log level.', () => {
-            const options = {
-                logLevel: false
-            }
-            expect(() => { install(() => {}, options) })
-              .to
-              .throw(Error, 'Provided options for vuejs-logger are not valid.')
-        })
-
-        it('install() should throw an error with the an incorrect log level.', () => {
-            const options = {
-                logLevel: undefined
-            }
-            expect(() => { install(() => {}, options) })
-              .to
-              .throw(Error, 'Provided options for vuejs-logger are not valid.')
-        })
-
-        it('install() should throw an error with the an incorrect log level.', () => {
-            const options = {
-                logLevel: null
-            }
-            expect(() => { install(() => {}, options) })
-              .to
-              .throw(Error, 'Provided options for vuejs-logger are not valid.')
         })
     })
 })
