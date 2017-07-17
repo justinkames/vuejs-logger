@@ -80,7 +80,7 @@ new Vue({
 
 function externalFunction() {
    // log from external function
-   Vue.$log.debug('log from non Vue function.') 
+   Vue.$log.debug('log from function outside component.') 
 }
 ```
 
