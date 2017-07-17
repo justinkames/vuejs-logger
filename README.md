@@ -85,7 +85,7 @@ new Vue({
 
 ## Contribute
 
-Feel free to dive in! [Open an issue]() or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/justinkames/vuejs-logger/issues/new) or submit PRs.
 
 vuejs-logger follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 
