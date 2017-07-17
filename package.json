@@ -1,7 +1,7 @@
 {
   "name": "vuejs-logger",
   "author": "Justin Kames",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vuejs-logger, provides customizable logging functionality for Vue.js.",
   "main": "dist/index.js",
   "repository": {
@@ -30,7 +30,6 @@
     "codecov": "2.2.0",
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
-    "uglify": "0.1.5",
-    "vuejs-logger": "0.1.11"
+    "uglify": "0.1.5"
   }
 }

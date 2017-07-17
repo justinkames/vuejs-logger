@@ -1,6 +1,4 @@
 import Logger from './logger'
-const o = {
+export default {
     install: Logger().install
 }
-window.VueLogger = o
-export default o
