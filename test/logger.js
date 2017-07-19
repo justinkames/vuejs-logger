@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueLogger from '../src/logger'
 
 const expect = chai.expect
-const {print, validateOptions, initLoggerInstance, logLevels, install} = VueLogger()
+const {print, validateOptions, initLoggerInstance, logLevels, install} = VueLogger
 
 describe('Logger.js', () => {
 

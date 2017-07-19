@@ -1,4 +1,4 @@
-export default function () {
+export default  (() => {
 
     const logLevels = ['debug', 'info', 'warn', 'error', 'fatal']
 
@@ -55,4 +55,4 @@ export default function () {
         initLoggerInstance,
         logLevels
     }
-}
+})()
