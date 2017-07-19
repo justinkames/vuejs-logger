@@ -38,6 +38,8 @@ logLevels :  ['debug', 'info', 'warn', 'error', 'fatal']
 
 This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go check them out if you don't have them locally installed!
 
+https://www.npmjs.com/package/vuejs-logger
+
 ```sh
 $ npm install vuejs-logger --save-exact
 ```
