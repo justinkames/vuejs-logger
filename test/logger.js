@@ -1,7 +1,8 @@
 import chai from 'chai'
-const expect = chai.expect
 import Vue from 'vue'
 import VueLogger from '../src/logger'
+
+const expect = chai.expect
 const {print, validateOptions, initLoggerInstance, logLevels, install} = VueLogger()
 
 describe('Logger.js', () => {
@@ -40,7 +41,7 @@ describe('Logger.js', () => {
             const options = {
                 logLevel: 'foo'
             }
-            expect(() => { install(() => {}, options) })
+            expect(() => { install(Vue, options) })
               .to
               .throw(Error, 'Provided options for vuejs-logger are not valid.')
         })
@@ -49,7 +50,7 @@ describe('Logger.js', () => {
             const options = {
                 logLevel: false
             }
-            expect(() => { install(() => {}, options) })
+            expect(() => { install(Vue, options) })
               .to
               .throw(Error, 'Provided options for vuejs-logger are not valid.')
         })
@@ -58,7 +59,7 @@ describe('Logger.js', () => {
             const options = {
                 logLevel: undefined
             }
-            expect(() => { install(() => {}, options) })
+            expect(() => { install(Vue, options) })
               .to
               .throw(Error, 'Provided options for vuejs-logger are not valid.')
         })
@@ -67,7 +68,7 @@ describe('Logger.js', () => {
             const options = {
                 logLevel: null
             }
-            expect(() => { install(() => {}, options) })
+            expect(() => { install(Vue, options) })
               .to
               .throw(Error, 'Provided options for vuejs-logger are not valid.')
         })

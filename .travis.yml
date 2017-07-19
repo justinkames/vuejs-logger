@@ -4,3 +4,6 @@
   cache:
     directories:
       - "node_modules"
+  install:
+      - npm install
+      - npm upload-coverage
