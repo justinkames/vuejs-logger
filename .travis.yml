@@ -6,4 +6,4 @@
       - "node_modules"
   install:
       - npm install
-      - npm upload-coverage
+      - npm run upload-coverage
