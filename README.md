@@ -93,7 +93,7 @@ function externalFunction() {
 }
 ```
 
-![screen shot 2017-10-17 at 10 43 53](https://user-images.githubusercontent.com/3469323/31655175-5b0a2dee-b328-11e7-9eb7-808c4391cf83.png)
+![screen shot 2017-10-17 at 10 51 28](https://user-images.githubusercontent.com/3469323/31655455-3738f606-b329-11e7-8778-30c69fa49ba2.png)
 
 ## Maintainers
 
