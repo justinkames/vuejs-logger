@@ -1,5 +1,14 @@
 export default (function () {
 
+    const defaultOptions = {
+        logLevel: 'debug',
+        separator: '|',
+        stringifyByDefault: false,
+        showLogLevel: false,
+        showMethodName: false,
+        showConsoleColors: false,
+    }
+
     const logLevels = ['debug', 'info', 'warn', 'error', 'fatal']
 
     function initLoggerInstance (options, logLevels) {
@@ -8,10 +17,10 @@ export default (function () {
               if (logLevels.indexOf(logLevel) >= logLevels.indexOf(options.logLevel)) {
                   logger[logLevel] = (...args) => {
                       let methodName = getMethodName()
-                      const methodNamePrefix = options.showMethodName ? methodName + ' | ' : ''
-                      const logLevelPrefix = options.showLogLevel ? logLevel + ' | ' : ''
+                      const methodNamePrefix = options.showMethodName ? methodName + ` ${options.separator} ` : ''
+                      const logLevelPrefix = options.showLogLevel ? logLevel + ` ${options.separator} ` : ''
                       const formattedArguments = options.stringifyArguments ? args.map(a => JSON.stringify(a)) : args
-                      print(logLevel, logLevelPrefix, methodNamePrefix, formattedArguments)
+                      print(logLevel, logLevelPrefix, methodNamePrefix, formattedArguments, options.showConsoleColors)
                   }
               }
               else {
@@ -22,8 +31,8 @@ export default (function () {
         return logger
     }
 
-    function print (logLevel = false, logLevelPrefix = false, methodNamePrefix = false, formattedArguments = false) {
-        if (logLevel === 'warn' || logLevel === 'error' || logLevel === 'fatal') {
+    function print (logLevel = false, logLevelPrefix = false, methodNamePrefix = false, formattedArguments = false, showConsoleColors = false) {
+        if (showConsoleColors && (logLevel === 'warn' || logLevel === 'error' || logLevel === 'fatal')) {
             console[logLevel === 'fatal' ? 'error' : logLevel](logLevelPrefix, methodNamePrefix, ...formattedArguments)
         } else {
             console.log(logLevelPrefix, methodNamePrefix, ...formattedArguments)
@@ -31,6 +40,7 @@ export default (function () {
     }
 
     function isValidOptions (options, logLevels) {
+
         if (!(options.logLevel && typeof options.logLevel === 'string' && logLevels.indexOf(options.logLevel) > -1)) {
             return false
         }
@@ -40,10 +50,19 @@ export default (function () {
         if (options.showLogLevel && typeof options.showLogLevel !== 'boolean') {
             return false
         }
+        if (options.showConsoleColors && typeof options.showConsoleColors !== 'boolean') {
+            return false
+        }
+        if (options.separator && (typeof options.separator === 'string' && options.separator.length > 3)) {
+            return false
+        }
         return !(options.showMethodName && typeof options.showMethodName !== 'boolean')
     }
 
     function install (Vue, options) {
+        // merge provided options with the default options
+        options = Object.assign(defaultOptions, options)
+
         if (isValidOptions(options, logLevels)) {
             Vue.$log = initLoggerInstance(options, logLevels)
             Vue.prototype.$log = Vue.$log

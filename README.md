@@ -52,13 +52,18 @@ Below you can find an example of how to use vuejs-logger :
 import VueLogger from 'vuejs-logger'
 
 const options = {
-    logLevel : 'debug',
+    // required ['debug', 'info', 'warn', 'error', 'fatal']
+    logLevel : 'debug', 
     // optional : defaults to false if not specified
     stringifyArguments : false,
     // optional : defaults to false if not specified
     showLogLevel : false,
     // optional : defaults to false if not specified
-    showMethodName : false
+    showMethodName : false,
+    // optional : defaults to '|' if not specified
+    separator: '|',
+    // optional : defaults to false if not specified
+    showConsoleColors: false
 }
 
 Vue.use(VueLogger, options)
@@ -87,6 +92,8 @@ function externalFunction() {
    Vue.$log.debug('log from function outside component.') 
 }
 ```
+
+![screen shot 2017-10-17 at 10 43 53](https://user-images.githubusercontent.com/3469323/31655175-5b0a2dee-b328-11e7-9eb7-808c4391cf83.png)
 
 ## Maintainers
 

@@ -12,7 +12,9 @@ describe('Logger.js', () => {
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
-                showMethodName: true
+                showMethodName: true,
+                separator: '|',
+                showConsoleColors: false,
             }
             Vue.use({install}, options)
 
@@ -41,7 +43,9 @@ describe('Logger.js', () => {
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
-                showMethodName: false
+                showMethodName: false,
+                separator: '|',
+                showConsoleColors: true,
             }
             Vue.use({install}, options)
             expect(Vue.$log).to.be.a('object')
@@ -106,7 +110,9 @@ describe('Logger.js', () => {
                 logLevel: 'info',
                 showLogLevel: true,
                 stringifyArguments: true,
-                showMethodName: false
+                showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)
             a.debug('test')
             a.info('test', ['test args'], ['test args'])
@@ -118,7 +124,9 @@ describe('Logger.js', () => {
                 logLevel: 'info',
                 showLogLevel: false,
                 stringifyArguments: false,
-                showMethodName: true
+                showMethodName: true,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)
             b.debug('test')
             b.info('test', ['test args'], ['test args'])
@@ -135,17 +143,41 @@ describe('Logger.js', () => {
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
-                showMethodName: true
+                showMethodName: true,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)).to.equal(true)
         })
 
         it('isValidOptions() should fail with incorrect options.', () => {
+
+            it('isValidOptions() should pass with correct options.', () => {
+                expect(isValidOptions({
+                    logLevel: 'debug',
+                    stringifyByDefault: false,
+                    showLogLevel: false,
+                    showMethodName: true,
+                    separator: '|||||',
+                    showConsoleColors: false,
+                }, logLevels)).to.equal(true)
+            })
+
+            expect(isValidOptions({
+                logLevel: 'debug',
+                stringifyByDefault: false,
+                showLogLevel: false,
+                showMethodName: true,
+                separator: '|',
+                showConsoleColors: 'FOO',
+            }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
                 logLevel: 'debug',
                 stringifyArguments: false,
                 showLogLevel: false,
                 showMethodName: 'TEST',
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
@@ -153,6 +185,8 @@ describe('Logger.js', () => {
                 stringifyArguments: 'TEST',
                 showLogLevel: false,
                 showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
@@ -160,6 +194,8 @@ describe('Logger.js', () => {
                 stringifyArguments: false,
                 showLogLevel: 'TEST',
                 showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
@@ -167,6 +203,8 @@ describe('Logger.js', () => {
                 stringifyArguments: false,
                 showLogLevel: false,
                 showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
@@ -177,13 +215,13 @@ describe('Logger.js', () => {
 
     describe('print()', () => {
         it('print() should use console.error() with fatal logLevel', () => {
-            print('fatal', 'fatal |', 'METHOD NAME | ', ['test'])
+            print('fatal', 'fatal |', 'METHOD NAME | ', ['test'], true)
         })
         it('print() should use console.error() with error logLevel', () => {
-            print('error', 'error |', 'METHOD NAME |', ['test'])
+            print('error', 'error |', 'METHOD NAME |', ['test'], true)
         })
         it('print() should use console.log() with any other logLevel', () => {
-            print('debug', 'debug |', 'METHOD NAME |', ['test'])
+            print('debug', 'debug |', 'METHOD NAME |', ['test'], false)
         })
     })
 })
