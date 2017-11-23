@@ -3,7 +3,7 @@ export default (function () {
     const defaultOptions = {
         logLevel: 'debug',
         separator: '|',
-        stringifyByDefault: false,
+        stringifyArguments: false,
         showLogLevel: false,
         showMethodName: false,
         showConsoleColors: false,
