@@ -151,16 +151,14 @@ describe('Logger.js', () => {
 
         it('isValidOptions() should fail with incorrect options.', () => {
 
-            it('isValidOptions() should pass with correct options.', () => {
-                expect(isValidOptions({
-                    logLevel: 'debug',
-                    stringifyByDefault: false,
-                    showLogLevel: false,
-                    showMethodName: true,
-                    separator: '|||||',
-                    showConsoleColors: false,
-                }, logLevels)).to.equal(true)
-            })
+            expect(isValidOptions({
+                logLevel: 'debug',
+                stringifyByDefault: false,
+                showLogLevel: false,
+                showMethodName: true,
+                separator: '|||||',
+                showConsoleColors: false,
+            }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
                 logLevel: 'debug',
@@ -210,6 +208,12 @@ describe('Logger.js', () => {
             expect(isValidOptions({
                 logLevel: 'debug',
             }, logLevels)).to.equal(true)
+
+            expect(isValidOptions({
+                logLevel: 'debug',
+                separator: '1234',
+            }, logLevels)).to.equal(false)
+
         })
     })
 

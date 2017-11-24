@@ -3,7 +3,7 @@ export default (function () {
     const defaultOptions = {
         logLevel: 'debug',
         separator: '|',
-        stringifyByDefault: false,
+        stringifyArguments: false,
         showLogLevel: false,
         showMethodName: false,
         showConsoleColors: false,
@@ -53,7 +53,7 @@ export default (function () {
         if (options.showConsoleColors && typeof options.showConsoleColors !== 'boolean') {
             return false
         }
-        if (options.separator && (typeof options.separator === 'string' && options.separator.length > 3)) {
+        if (options.separator && (typeof options.separator !== 'string' || (typeof options.separator === 'string' && options.separator.length > 3))) {
             return false
         }
         return !(options.showMethodName && typeof options.showMethodName !== 'boolean')
