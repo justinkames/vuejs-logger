@@ -40,7 +40,6 @@ export default (function () {
     }
 
     function isValidOptions (options, logLevels) {
-
         if (!(options.logLevel && typeof options.logLevel === 'string' && logLevels.indexOf(options.logLevel) > -1)) {
             return false
         }
@@ -60,7 +59,6 @@ export default (function () {
     }
 
     function install (Vue, options) {
-        // merge provided options with the default options
         options = Object.assign(defaultOptions, options)
 
         if (isValidOptions(options, logLevels)) {
@@ -72,11 +70,13 @@ export default (function () {
     }
 
     function getMethodName () {
-        let stackTrace = Error().stack.split('\n')[3]
+        let error = {}
+        try { throw new Error('') } catch (e) { error = e }
+        let stackTrace = error.stack.split('\n')[3]
         if (/ /.test(stackTrace)) {
             stackTrace = stackTrace.trim().split(' ')[1]
         }
-        if (stackTrace.includes('.')) {
+        if (stackTrace && stackTrace.includes('.')) {
             stackTrace = stackTrace.split('.')[1]
         }
         return stackTrace
@@ -89,5 +89,4 @@ export default (function () {
         initLoggerInstance,
         logLevels
     }
-})
-()
+})()
