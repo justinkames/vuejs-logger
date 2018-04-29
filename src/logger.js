@@ -57,6 +57,9 @@ export default (function () {
         if (options.separator && (typeof options.separator !== 'string' || (typeof options.separator === 'string' && options.separator.length > 3))) {
             return false
         }
+        if (typeof options.isEnabled !== 'boolean') {
+            return false
+        }
         return !(options.showMethodName && typeof options.showMethodName !== 'boolean')
     }
 
