@@ -72,6 +72,10 @@ export default (function () {
     function getMethodName () {
         let error = {}
         try { throw new Error('') } catch (e) { error = e }
+        // IE9 does not have .stack property
+        if (error.stack === undefined) {
+            return ''
+        }
         let stackTrace = error.stack.split('\n')[3]
         if (/ /.test(stackTrace)) {
             stackTrace = stackTrace.trim().split(' ')[1]
