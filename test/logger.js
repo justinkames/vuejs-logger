@@ -9,6 +9,7 @@ describe('Logger.js', () => {
     describe('getMethodName()', () => {
         it('Should show the parent function.', () => {
             const options = {
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
@@ -40,6 +41,7 @@ describe('Logger.js', () => {
 
         it('install() should work with the correct params.', () => {
             const options = {
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
@@ -100,6 +102,15 @@ describe('Logger.js', () => {
               .to
               .throw(Error, 'Provided options for vuejs-logger are not valid.')
         })
+
+        it('install() should throw an error with the an incorrect isEnabled value', () => {
+            const options = {
+                isEnabled: null
+            }
+            expect(() => { install(Vue, options) })
+                .to
+                .throw(Error, 'Provided options for vuejs-logger are not valid.')
+        })
     })
 
     describe('initLoggerInstance()', () => {
@@ -140,6 +151,7 @@ describe('Logger.js', () => {
 
         it('isValidOptions() should pass with correct options.', () => {
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
@@ -152,6 +164,7 @@ describe('Logger.js', () => {
         it('isValidOptions() should fail with incorrect options.', () => {
 
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
@@ -161,6 +174,7 @@ describe('Logger.js', () => {
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyByDefault: false,
                 showLogLevel: false,
@@ -170,6 +184,7 @@ describe('Logger.js', () => {
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyArguments: false,
                 showLogLevel: false,
@@ -179,6 +194,7 @@ describe('Logger.js', () => {
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyArguments: 'TEST',
                 showLogLevel: false,
@@ -188,6 +204,7 @@ describe('Logger.js', () => {
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'debug',
                 stringifyArguments: false,
                 showLogLevel: 'TEST',
@@ -197,6 +214,7 @@ describe('Logger.js', () => {
             }, logLevels)).to.equal(false)
 
             expect(isValidOptions({
+                isEnabled: true,
                 logLevel: 'TEST',
                 stringifyArguments: false,
                 showLogLevel: false,
@@ -207,11 +225,53 @@ describe('Logger.js', () => {
 
             expect(isValidOptions({
                 logLevel: 'debug',
+                isEnabled: true,
             }, logLevels)).to.equal(true)
 
             expect(isValidOptions({
+                isEnabled: '',
                 logLevel: 'debug',
                 separator: '1234',
+            }, logLevels)).to.equal(false)
+
+            expect(isValidOptions({
+                isEnabled: true,
+                logLevel: 'debug',
+                stringifyArguments: false,
+                showLogLevel: false,
+                showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
+            }, logLevels)).to.equal(true)
+
+            expect(isValidOptions({
+                isEnabled: false,
+                logLevel: 'debug',
+                stringifyArguments: false,
+                showLogLevel: false,
+                showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
+            }, logLevels)).to.equal(true)
+
+            expect(isValidOptions({
+                isEnabled: '',
+                logLevel: 'debug',
+                stringifyArguments: false,
+                showLogLevel: false,
+                showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
+            }, logLevels)).to.equal(false)
+
+            expect(isValidOptions({
+                isEnabled: null,
+                logLevel: 'debug',
+                stringifyArguments: false,
+                showLogLevel: false,
+                showMethodName: false,
+                separator: '|',
+                showConsoleColors: false,
             }, logLevels)).to.equal(false)
 
         })

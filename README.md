@@ -34,6 +34,13 @@ vuejs-logger is a logging library that enables logging for Vue applications. It 
 logLevels :  ['debug', 'info', 'warn', 'error', 'fatal']
 ```
 
+Option to disable the logger (for using it on PRODUCTION)
+
+```js
+isEnabled : false
+```
+
+
 ## Install
 
 This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go check them out if you don't have them locally installed!
@@ -52,8 +59,10 @@ Below you can find an example of how to use vuejs-logger :
 import VueLogger from 'vuejs-logger'
 
 const options = {
+    // optional : defaults to true if not specified
+    isEnabled: true,
     // required ['debug', 'info', 'warn', 'error', 'fatal']
-    logLevel : 'debug', 
+    logLevel : 'debug',
     // optional : defaults to false if not specified
     stringifyArguments : false,
     // optional : defaults to false if not specified
