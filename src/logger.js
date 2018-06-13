@@ -18,8 +18,7 @@ export default (function () {
               if (logLevels.indexOf(logLevel) >= logLevels.indexOf(options.logLevel) &&
                   options.isEnabled) {
                   logger[logLevel] = (...args) => {
-                      let methodName = getMethodName()
-                      const methodNamePrefix = options.showMethodName ? methodName + ` ${options.separator} ` : ''
+                      const methodNamePrefix = options.showMethodName ? getMethodName() + ` ${options.separator} ` : ''
                       const logLevelPrefix = options.showLogLevel ? logLevel + ` ${options.separator} ` : ''
                       const formattedArguments = options.stringifyArguments ? args.map(a => JSON.stringify(a)) : args
                       print(logLevel, logLevelPrefix, methodNamePrefix, formattedArguments, options.showConsoleColors)
