@@ -18,8 +18,7 @@ export default (function () {
               if (logLevels.indexOf(logLevel) >= logLevels.indexOf(options.logLevel) &&
                   options.isEnabled) {
                   logger[logLevel] = (...args) => {
-                      let methodName = getMethodName()
-                      const methodNamePrefix = options.showMethodName ? methodName + ` ${options.separator} ` : ''
+                      const methodNamePrefix = options.showMethodName ? getMethodName() + ` ${options.separator} ` : ''
                       const logLevelPrefix = options.showLogLevel ? logLevel + ` ${options.separator} ` : ''
                       const formattedArguments = options.stringifyArguments ? args.map(a => JSON.stringify(a)) : args
                       print(logLevel, logLevelPrefix, methodNamePrefix, formattedArguments, options.showConsoleColors)
@@ -34,10 +33,18 @@ export default (function () {
     }
 
     function print (logLevel = false, logLevelPrefix = false, methodNamePrefix = false, formattedArguments = false, showConsoleColors = false) {
+        let logArguments = [];
+        if(logLevelPrefix !== '') {
+            logArguments.push(logLevelPrefix);
+        }
+        if(methodNamePrefix !== '') {
+            logArguments.push(methodNamePrefix);
+        }
+        logArguments = [...arguments, ...formattedArguments];
         if (showConsoleColors && (logLevel === 'warn' || logLevel === 'error' || logLevel === 'fatal')) {
-            console[logLevel === 'fatal' ? 'error' : logLevel](logLevelPrefix, methodNamePrefix, ...formattedArguments)
+            console[logLevel === 'fatal' ? 'error' : logLevel](...logArguments)
         } else {
-            console.log(logLevelPrefix, methodNamePrefix, ...formattedArguments)
+            console.log(...logArguments)
         }
     }
 
