@@ -33,18 +33,18 @@ export default (function () {
     }
 
     function print (logLevel = false, logLevelPrefix = false, methodNamePrefix = false, formattedArguments = false, showConsoleColors = false) {
-        let arguments = [];
+        let logArguments = [];
         if(logLevelPrefix !== '') {
-            arguments.push(logLevelPrefix);
+            logArguments.push(logLevelPrefix);
         }
         if(methodNamePrefix !== '') {
-            arguments.push(methodNamePrefix);
+            logArguments.push(methodNamePrefix);
         }
-        arguments = [...arguments, ...formattedArguments];
+        logArguments = [...arguments, ...formattedArguments];
         if (showConsoleColors && (logLevel === 'warn' || logLevel === 'error' || logLevel === 'fatal')) {
-            console[logLevel === 'fatal' ? 'error' : logLevel](...arguments)
+            console[logLevel === 'fatal' ? 'error' : logLevel](...logArguments)
         } else {
-            console.log(...arguments)
+            console.log(...logArguments)
         }
     }
 
