@@ -1,40 +1,38 @@
 {
-  "name": "vuejs-logger",
-  "author": "Justin Kames",
-  "version": "1.4.0",
-  "description": "Vuejs-logger, provides customizable logging functionality for Vue.js.",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/justinkames/vuejs-logger.git"
-  },
+  "name": "mean-poc",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha -- --compilers js:babel-core/register -R spec --debug",
-    "upload-coverage": "codecov -t $CODECOV_TOKEN",
-    "build-transpile-uglify": "node_modules/babel-cli/bin/babel.js src --out-dir dist && node_modules/uglify-js/bin/uglifyjs dist/logger.js -c -m -o dist/logger.js",
-    "build-transpile": "node_modules/babel-cli/bin/babel.js src --out-dir dist && node_modules/uglify-js/bin/uglifyjs dist/logger.js -c -m -o dist/logger.js",
-    "prepublish": "npm test && npm run build-transpile-uglify"
-  },
-  "license": "MIT",
-  "babel": {
-    "presets": [
-      "es2015"
-    ],
-    "plugins": [
-      "transform-object-assign"
-    ]
+    "build": "tsc",
+    "tsc": "tsc",
+    "test": "tsc && jest"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-core": "6.25.0",
-    "babel-loader": "7.1.1",
-    "babel-plugin-transform-object-assign": "6.22.0",
-    "babel-preset-es2015": "6.24.1",
-    "chai": "4.1.0",
-    "codecov": "2.2.0",
-    "istanbul": "1.1.0-alpha.1",
-    "mocha": "3.4.2",
-    "uglify": "0.1.5",
-    "vue": "2.5.13"
+    "@types/jest": "23.3.1",
+    "@types/node": "10.5.3",
+    "eslint": "5.2.0",
+    "jest": "23.4.1",
+    "ts-jest": "23.0.1",
+    "tsc": "1.20150623.0",
+    "typescript": "2.9.2",
+    "chai": "4.1.2",
+    "vue": "2.5.16"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
