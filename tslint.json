@@ -1,0 +1,15 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "only-arrow-functions": [
+      true,
+      "allow-declarations",
+      "allow-named-functions"
+    ]
+  },
+  "rulesDirectory": []
+}
