@@ -3,7 +3,7 @@
   "author": "Justin Kames",
   "description": "vuejs-logger, provides customizable logging functionality for Vue.js.",
   "version": "1.5.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "tsc": "tsc --watch",
