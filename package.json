@@ -14,7 +14,7 @@
     "tsc": "tsc --watch",
     "test": "tsc && jest",
     "upload-coverage": "codecov -t $CODECOV_TOKEN",
-    "publish" : "npm run build && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "devDependencies": {
     "@types/jest": "23.3.1",
@@ -24,6 +24,7 @@
     "typescript": "2.9.2",
     "chai": "4.1.2",
     "vue": "2.5.16",
-    "es6-object-assign": "1.1.0"
+    "es6-object-assign": "1.1.0",
+    "codecov": "3.0.4"
   }
 }

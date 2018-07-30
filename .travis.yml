@@ -5,6 +5,6 @@
     directories:
       - "node_modules"
   install:
-      - npm install -g typescript
+      - npm install -g typescript codecov
       - npm install
       - npm run upload-coverage
