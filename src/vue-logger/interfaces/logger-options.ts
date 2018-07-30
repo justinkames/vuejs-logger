@@ -1,8 +1,8 @@
-import {LogLevel} from "../enum/log-levels";
+import {LogLevels} from "../enum/log-levels";
 
 export interface ILoggerOptions {
     isEnabled: boolean;
-    logLevel: LogLevel;
+    logLevel: LogLevels;
     separator: string;
     showConsoleColors: boolean;
     showLogLevel: boolean;
