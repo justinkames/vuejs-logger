@@ -16,7 +16,7 @@
 - [Usage](#usage)
 - [Properties](#properties)
 - [Code example](#code)
-- [Production tips](#Production tips)
+- [Production tips](#production-tips)
 - [Maintainers](#maintainers)
 - [Contribute](#contribute)
 - [License](#license)
@@ -58,7 +58,7 @@ Below you can find an example of how to use vuejs-logger :
 | Name      | Required | Type          | Default     | Description |
 | ---       | ---      | ---           | ---         | ---         |
 | isEnabled      | false  | Boolean |  true            | Enables the vuejs-logger plugin, useful toggle for production/development. |
-| logLevel     | false | String | 'debug'           | Choose between ['debug', 'info', 'warn', 'error', 'fatal']. Read [production tips](#Production tips). |
+| logLevel     | false | String | 'debug'           | Choose between ['debug', 'info', 'warn', 'error', 'fatal']. Read [production tips](#production-tips). |
 | stringifyArguments | false | Boolean          | false       | If true, all input will go through JSON.stringify(). Useful when printing reactive properties.|
 | showLogLevel  | false | Boolean          | false       | If true, the loglevel will be shown. |
 | showMethodName | false | Boolean | false       | If true, the method name of the parent function will be shown in the console. |
@@ -69,7 +69,7 @@ Below you can find an example of how to use vuejs-logger :
 
 ```js
 import VueLogger from 'vuejs-logger';
-const isProduction = process.env.NODE_ENV !=== 'production';
+const isProduction = process.env.NODE_ENV === 'production';
  
 const options = {
     isEnabled: true,
