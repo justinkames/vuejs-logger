@@ -7,4 +7,4 @@
   install:
       - npm install -g typescript codecov
       - npm install
-      - npm run upload-coverage
+      - npm test && npm run upload-coverage
