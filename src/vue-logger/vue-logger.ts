@@ -71,9 +71,9 @@ class VueLogger implements ILogger {
                         const methodNamePrefix = options.showMethodName ? methodName + ` ${options.separator} ` : "";
                         const logLevelPrefix = options.showLogLevel ? logLevel + ` ${options.separator} ` : "";
                         const formattedArguments = options.stringifyArguments ? args.map((a) => JSON.stringify(a)) : args;
-                        const logMessage = `${logLevelPrefix} ${methodNamePrefix} ${formattedArguments.join(" ")}`;
-                        this.printLogMessage(logLevel, logMessage, options.showConsoleColors);
-                        return logMessage;
+                        const logMessage = `${logLevelPrefix} ${methodNamePrefix}`;
+                        this.printLogMessage(logLevel, logMessage, options.showConsoleColors, formattedArguments);
+                        return `${logMessage} ${formattedArguments.toString()}`;
                     };
                 } else {
                     logger[logLevel] = () => undefined;
@@ -83,11 +83,11 @@ class VueLogger implements ILogger {
         return logger;
     }
 
-    private printLogMessage(logLevel: string, logMessage: string, showConsoleColors: boolean) {
+    private printLogMessage(logLevel: string, logMessage: string, showConsoleColors: boolean, formattedArguments: any) {
         if (showConsoleColors && (logLevel === "warn" || logLevel === "error" || logLevel === "fatal")) {
-            console[logLevel === "fatal" ? "error" : logLevel](logMessage);
+            console[logLevel === "fatal" ? "error" : logLevel](logMessage, ...formattedArguments);
         } else {
-            console.log(logMessage);
+            console.log(logMessage, ...formattedArguments);
         }
     }
 

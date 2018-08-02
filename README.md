@@ -75,10 +75,10 @@ const options = {
     isEnabled: true,
     logLevel : isProduction ? 'error' : 'debug',
     stringifyArguments : false,
-    showLogLevel : false,
-    showMethodName : false,
+    showLogLevel : true,
+    showMethodName : true,
     separator: '|',
-    showConsoleColors: false
+    showConsoleColors: true
 };
 
 Vue.use(VueLogger, options);
