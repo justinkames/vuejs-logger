@@ -1,7 +1,7 @@
-import {ILoggerOptions} from "./logger-options";
+import { ILoggerOptions } from "./logger-options";
 
 export interface ILogger {
-    install(Vue: any, options: ILoggerOptions);
+  install(Vue: any, options: ILoggerOptions);
 
-    isValidOptions(options: ILoggerOptions, logLevels: string[]): boolean;
+  isValidOptions(options: ILoggerOptions, logLevels: string[]): boolean;
 }
