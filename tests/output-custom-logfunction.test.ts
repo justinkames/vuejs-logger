@@ -3,23 +3,12 @@ import Vue from "vue/dist/vue.min";
 import VueLogger from "../src";
 import {LogLevels} from "../src/vue-logger/enum/log-levels";
 import {ILoggerOptions} from "../src/vue-logger/interfaces/logger-options";
-import spies from 'chai-spies';
-
-chai.use(spies);
 
 const expect = chai.expect;
-const sandbox = chai.spy.sandbox();
 
+describe("output-custom-logfuncton", () => {
 
-describe("output", () => {
-
-    afterEach(() => {
-        sandbox.restore(); // restores original methods
-    });
-
-    test("Should instantiate log functions and be reachable from external functions.", (done) => {
-        sandbox.on(console, ['log', 'warn', 'error']);
-
+    test("Should call customPrintLogMessage when available.", (done) => {
         const options = {
             isEnabled: true,
             logLevel: LogLevels.DEBUG,
@@ -28,30 +17,35 @@ describe("output", () => {
             showMethodName: true,
             separator: "|",
             showConsoleColors: false,
+            printLogOnConsole: false,
+            customPrintLogMessage: (logLevel: string, logMessage: string, showConsoleColors: boolean, formattedArguments: any) => {
+                expect(logLevel).to.exist;
+                expect(logMessage).to.exist;
+                expect(showConsoleColors).to.exist;
+                expect(formattedArguments).to.exist;
+                console.log(formattedArguments)
+                if (formattedArguments == "done") { // has done?
+                    console.log("CHEGUEI")
+                    done();
+                }
+            }
         } as ILoggerOptions;
 
         Vue.use(VueLogger, options);
         const App = new Vue({
             created() {
                 this.foo();
-                expect(console.log).to.have.been.called();
-                done();
             },
             methods: {
                 foo() {
                     expect(Vue.$log.fatal("test")).to.exist;
-                    expect(Vue.$log.error("error")).to.exist;
-                    expect(Vue.$log.warn("warn")).to.exist;
-                    expect(Vue.$log.info("info")).to.exist;
-                    expect(Vue.$log.debug("debug")).to.exist;
                     externalFunction();
                 },
             },
         });
 
         function externalFunction(): void {
-            expect(Vue.$log.fatal("test")).to.exist;
-            expect(Vue.$log.fatal("test")).to.contains("externalFunction");
+            expect(Vue.$log.fatal("done")).to.exist;
         }
     });
 });

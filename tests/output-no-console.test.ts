@@ -10,14 +10,13 @@ chai.use(spies);
 const expect = chai.expect;
 const sandbox = chai.spy.sandbox();
 
-
-describe("output", () => {
+describe("output-no-console", () => {
 
     afterEach(() => {
         sandbox.restore(); // restores original methods
     });
 
-    test("Should instantiate log functions and be reachable from external functions.", (done) => {
+    test("Should not show console messages with printLogOnConsole equals to false.", (done) => {
         sandbox.on(console, ['log', 'warn', 'error']);
 
         const options = {
@@ -28,22 +27,19 @@ describe("output", () => {
             showMethodName: true,
             separator: "|",
             showConsoleColors: false,
+            printLogOnConsole: false
         } as ILoggerOptions;
 
         Vue.use(VueLogger, options);
         const App = new Vue({
             created() {
                 this.foo();
-                expect(console.log).to.have.been.called();
+                expect(console.log).to.have.not.been.called();
                 done();
             },
             methods: {
                 foo() {
                     expect(Vue.$log.fatal("test")).to.exist;
-                    expect(Vue.$log.error("error")).to.exist;
-                    expect(Vue.$log.warn("warn")).to.exist;
-                    expect(Vue.$log.info("info")).to.exist;
-                    expect(Vue.$log.debug("debug")).to.exist;
                     externalFunction();
                 },
             },
@@ -51,7 +47,6 @@ describe("output", () => {
 
         function externalFunction(): void {
             expect(Vue.$log.fatal("test")).to.exist;
-            expect(Vue.$log.fatal("test")).to.contains("externalFunction");
         }
     });
 });

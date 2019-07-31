@@ -37,6 +37,12 @@ class VueLogger implements ILogger {
         if (typeof options.isEnabled !== "boolean") {
             return false;
         }
+        if (options.printLogOnConsole && (typeof options.printLogOnConsole !== "boolean")) {
+            return false;
+        }
+        if (options.customPrintLogMessage && (typeof options.customPrintLogMessage !== "function")) {
+            return false;
+        }
         return !(options.showMethodName && typeof options.showMethodName !== "boolean");
     }
 
@@ -72,7 +78,12 @@ class VueLogger implements ILogger {
                         const logLevelPrefix = options.showLogLevel ? logLevel + ` ${options.separator} ` : "";
                         const formattedArguments = options.stringifyArguments ? args.map((a) => JSON.stringify(a)) : args;
                         const logMessage = `${logLevelPrefix} ${methodNamePrefix}`;
-                        this.printLogMessage(logLevel, logMessage, options.showConsoleColors, formattedArguments);
+                        if (options.customPrintLogMessage) {
+                            options.customPrintLogMessage(logLevel, logMessage, options.showConsoleColors, formattedArguments);
+                        }
+                        if (options.printLogOnConsole) {
+                            this.printLogMessage(logLevel, logMessage, options.showConsoleColors, formattedArguments);
+                        }
                         return `${logMessage} ${formattedArguments.toString()}`;
                     };
                 } else {
@@ -100,6 +111,8 @@ class VueLogger implements ILogger {
             showLogLevel: false,
             showMethodName: false,
             stringifyArguments: false,
+            printLogOnConsole: true,
+            customPrintLogMessage: null
         };
     }
 }

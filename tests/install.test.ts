@@ -17,6 +17,8 @@ describe("vue-logger.ts", () => {
             showConsoleColors: true,
             showLogLevel: false,
             showMethodName: false,
+            printLogOnConsole: true,
+            customPrintLogMessage: null
         };
         Vue.use(VueLogger, options);
         expect(Vue.$log).to.be.a("object");
