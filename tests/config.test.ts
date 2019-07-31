@@ -19,6 +19,20 @@ describe("isValidOptions()", () => {
         strictEqual(input, true);
     });
 
+    test("isValidOptions() should pass with correct customPrintLogMessage.", () => {
+        const func:(logLevel: string, logMessage: string, showConsoleColors: boolean, formattedArguments: any) => void = function testFunction (a:string, b:string, c:boolean, d:any) { return; };
+        strictEqual(VueLogger.isValidOptions({
+            isEnabled: true,
+            logLevel: "debug",
+            stringifyArguments: false,
+            showLogLevel: false,
+            showMethodName: true,
+            separator: "|",
+            showConsoleColors: false,
+            customPrintLogMessage: func,
+        } as any, logLevels), true);
+    });
+
     test("isValidOptions() should fail with incorrect options.", () => {
 
         strictEqual(VueLogger.isValidOptions({
@@ -100,6 +114,8 @@ describe("isValidOptions()", () => {
             showMethodName: false,
             separator: "|",
             showConsoleColors: false,
+            printLogOnConsole: true,
+            customPrintLogMessage: null
         } as any, logLevels), true);
 
         strictEqual(VueLogger.isValidOptions({
@@ -130,6 +146,18 @@ describe("isValidOptions()", () => {
             showMethodName: false,
             separator: "|",
             showConsoleColors: false,
+        } as any, logLevels), false);
+
+        strictEqual(VueLogger.isValidOptions({
+            logLevel: "debug",
+            isEnabled: true,
+            printLogOnConsole: 'false'
+        } as any, logLevels), false);
+
+        strictEqual(VueLogger.isValidOptions({
+            logLevel: "debug",
+            isEnabled: true,
+            customPrintLogMessage: 'non function'
         } as any, logLevels), false);
     });
 });

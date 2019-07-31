@@ -64,6 +64,8 @@ Below you can find an example of how to use vuejs-logger :
 | showMethodName | false | Boolean | false       | If true, the method name of the parent function will be shown in the console. |
 | separator | false | String | ' l '       | The seperator between parts of the output ( see [screenshot](#screenshot). |
 | showConsoleColors | false | Boolean | false       | If true, enables console.warn, console.fatal, console.error for corresponding loglevels. |
+| printLogOnConsole | false | Boolean | true       | If true, errors will be printed on console. (best used together with customPrintLogMessage) |
+| customPrintLogMessage | false | Function | null       | You can define a custom PrintLogMessage function, so you can send logs to backend. Function params: (logLevel: string, logMessage: string, showConsoleColors: boolean, formattedArguments: any) |
 
 #### Code example
 
@@ -107,7 +109,23 @@ function externalFunction() {
    Vue.$log.debug('log from function outside component.');
 }
 ```
-
+##### Example of 'customPrintLogMessage' 
+```js
+const options = {
+    isEnabled: true,
+    logLevel : isProduction ? 'error' : 'debug',
+    stringifyArguments : false,
+    showLogLevel : true,
+    showMethodName : true,
+    separator: '|',
+    showConsoleColors: true,
+    printLogOnConsole: false, // will just send messages to the server
+    customPrintLogMessage: function (logLevel, logMessage, showConsoleColors, formattedArguments) {
+        // send to server
+        // axios.post('/server/url', {logLevel: logLevel, logMessage: logMessage, args: formattedArguments});    
+    }
+};
+```
 
 #### Screenshot
 

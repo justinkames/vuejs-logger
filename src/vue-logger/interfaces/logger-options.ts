@@ -8,4 +8,6 @@ export interface ILoggerOptions {
     showLogLevel: boolean;
     showMethodName: boolean;
     stringifyArguments: boolean;
+    printLogOnConsole: boolean;
+    customPrintLogMessage: (logLevel: string, logMessage: string, showConsoleColors: boolean, formattedArguments: any) => void;
 }
