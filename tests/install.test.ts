@@ -1,9 +1,9 @@
 import {notStrictEqual, strictEqual} from "assert";
 import chai from "chai";
 import Vue from "vue/dist/vue.min";
-import VueLogger from "../src";
-import {LogLevels} from "../src/vue-logger/enum/log-levels";
-import {ILoggerOptions} from "../src/vue-logger/interfaces/logger-options";
+import VueLogger from "../src/index";
+import {LogLevels} from "../src/enum/log-levels";
+import {ILoggerOptions} from "../src/interfaces/logger-options";
 const expect = chai.expect;
 
 describe("vue-logger.ts", () => {

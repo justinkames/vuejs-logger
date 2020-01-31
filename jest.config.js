@@ -12,6 +12,7 @@ module.exports = {
     testURL: "http://localhost/",
     collectCoverage: true,
     collectCoverageFrom: [
-        "src/**/*.{ts,tsx,js,jsx}"
+        "src/**/*.ts",
+        "!src/**/**/*.d.ts",
     ]
 }

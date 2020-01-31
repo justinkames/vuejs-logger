@@ -11,5 +11,8 @@
       "allow-named-functions"
     ]
   },
+  "rules": {
+    "quotemark": [true, "single", "avoid-escape"]
+  },
   "rulesDirectory": []
 }

@@ -3,30 +3,31 @@
   "license": "MIT",
   "author": "Justin Kames",
   "description": "vuejs-logger, provides customizable logging functionality for Vue.js.",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/justinkames/vuejs-logger.git"
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm test && mkdir -p ./dist/lib/types && cp src/lib/types/index.d.ts ./dist/lib/types/index.d.ts",
     "tsc": "tsc --watch",
     "test": "tsc && jest",
     "upload-coverage": "codecov -t $CODECOV_TOKEN",
-    "publish": "npm run build && npm publish"
+    "publish": "npm run build && npm test && npm publish"
   },
   "devDependencies": {
-    "@types/jest": "23.3.1",
-    "@types/node": "10.5.3",
-    "jest": "23.4.1",
-    "ts-jest": "23.0.1",
-    "typescript": "2.9.2",
-    "chai": "4.1.2",
-    "vue": "2.5.16",
-    "codecov": "3.0.4"
+    "@types/jest": "25.1.1",
+    "@types/node": "13.5.3",
+    "jest": "25.1.0",
+    "ts-jest": "25.1.0",
+    "typescript": "3.7.5",
+    "chai": "4.2.0",
+    "codecov": "3.6.2"
   },
   "dependencies": {
+    "vue": "2.6.11",
     "es6-object-assign": "1.1.0"
-  }
+  },
+  "typings": "dist/lib/types/index.d.ts"
 }

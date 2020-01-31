@@ -1,6 +1,6 @@
 import {strict, strictEqual} from "assert";
-import VueLogger from "../src";
-import {LogLevels} from "../src/vue-logger/enum/log-levels";
+import VueLogger from "../src/index";
+import {LogLevels} from "../src/enum/log-levels";
 
 describe("isValidOptions()", () => {
 

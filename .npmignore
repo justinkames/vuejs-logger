@@ -1,5 +1,13 @@
+/dist/
+/node_modules/
+.idea
 coverage/
-node_modules/
-sample-project/
-tests/
+package-lock.json
+sample-project
+ts-sample-project
+.travis.yml
+jest.config.js
+tsconfig.json
+tslint.json
 src/
+tests/
