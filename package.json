@@ -14,7 +14,7 @@
     "tsc": "tsc --watch",
     "test": "tsc && jest",
     "upload-coverage": "codecov -t $CODECOV_TOKEN",
-    "publish": "npm run build && npm test && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "devDependencies": {
     "@types/jest": "25.1.1",
