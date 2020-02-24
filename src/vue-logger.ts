@@ -48,6 +48,13 @@ class VueLogger implements ILogger {
         } catch (e) {
             error = e;
         }
+
+        //@babel/runtime: function name comes after a certain line
+        if (error.stack.split("asyncToGenerator.js:30:12").length > 1) {
+            let split = error.stack.split("asyncToGenerator.js:30:12")
+            return split[1].substring(0, split[1].indexOf("@web")).split('\n_').join('')
+        }
+
         // IE9 does not have .stack property
         if (error.stack === undefined) {
             return "";
