@@ -72,7 +72,7 @@ import VueLogger from 'vuejs-logger';
 const isProduction = process.env.NODE_ENV === 'production';
  
 const options = {
-    isEnabled: true,
+    isEnabled: !isProduction,
     logLevel : isProduction ? 'error' : 'debug',
     stringifyArguments : false,
     showLogLevel : true,
