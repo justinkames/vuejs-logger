@@ -5,6 +5,10 @@ import Vue = require('vue');
 
 import * as VueLogger from '../../index';
 
+import { PluginFunction } from "vue";
+
+export const install: PluginFunction<{}>;
+
 export interface Log {
     debug(...args: any[]): void;
 
