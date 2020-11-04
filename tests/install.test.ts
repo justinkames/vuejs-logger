@@ -12,11 +12,9 @@ describe("vue-logger.ts", () => {
         const options: ILoggerOptions = {
             isEnabled: true,
             logLevel: LogLevels.FATAL,
-            separator: "|",
             stringifyArguments: false,
             showConsoleColors: true,
-            showLogLevel: false,
-            showMethodName: false,
+            format: "${message} ${args.join(' | ')}",
         };
         Vue.use(VueLogger, options);
         expect(Vue.$log).to.be.a("object");
@@ -31,11 +29,9 @@ describe("vue-logger.ts", () => {
         const options: any = {
             isEnabled: true,
             logLevel: LogLevels.DEBUG,
-            separator: "|",
             stringifyArguments: false,
             showConsoleColors: true,
-            showLogLevel: false,
-            showMethodName: "wrong value for test.",
+            format: true,
         };
         expect(() => {
             VueLogger.install(Vue, options);

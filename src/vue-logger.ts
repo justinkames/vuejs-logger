@@ -1,5 +1,6 @@
 import {LogLevels} from "./enum/log-levels";
 import {ILogger} from "./interfaces/logger";
+import {ILoggerFormatParams} from "./interfaces/logger-format-params";
 import {ILoggerOptions} from "./interfaces/logger-options";
 
 class VueLogger implements ILogger {
@@ -25,19 +26,13 @@ class VueLogger implements ILogger {
         if (options.stringifyArguments && typeof options.stringifyArguments !== "boolean") {
             return false;
         }
-        if (options.showLogLevel && typeof options.showLogLevel !== "boolean") {
-            return false;
-        }
         if (options.showConsoleColors && typeof options.showConsoleColors !== "boolean") {
             return false;
         }
-        if (options.separator && (typeof options.separator !== "string" || (typeof options.separator === "string" && options.separator.length > 3))) {
+        if (options.format && typeof options.format !== "string") {
             return false;
         }
-        if (typeof options.isEnabled !== "boolean") {
-            return false;
-        }
-        return !(options.showMethodName && typeof options.showMethodName !== "boolean");
+        return typeof options.isEnabled === "boolean";
     }
 
     private getMethodName(): string {
@@ -66,12 +61,15 @@ class VueLogger implements ILogger {
         const logger = {};
         logLevels.forEach((logLevel) => {
                 if (logLevels.indexOf(logLevel) >= logLevels.indexOf(options.logLevel) && options.isEnabled) {
-                    logger[logLevel] = (...args) => {
-                        const methodName = this.getMethodName();
-                        const methodNamePrefix = options.showMethodName ? methodName + ` ${options.separator} ` : "";
-                        const logLevelPrefix = options.showLogLevel ? logLevel + ` ${options.separator} ` : "";
+                    logger[logLevel] = (message, ...args) => {
                         const formattedArguments = options.stringifyArguments ? args.map((a) => JSON.stringify(a)) : args;
-                        const logMessage = `${logLevelPrefix} ${methodNamePrefix}`;
+                        const formatParams: ILoggerFormatParams = {
+                            message,
+                            methodName: this.getMethodName(),
+                            level: logLevel as LogLevels,
+                            args: formattedArguments,
+                        }
+                        const logMessage = this.interpolateTemplateString(options.format, formatParams);
                         this.printLogMessage(logLevel, logMessage, options.showConsoleColors, formattedArguments);
                         return `${logMessage} ${formattedArguments.toString()}`;
                     };
@@ -81,6 +79,11 @@ class VueLogger implements ILogger {
             },
         );
         return logger;
+    }
+
+    private interpolateTemplateString(templateString: string, params: {[key: string]: any}): string {
+        const names = Object.keys(params)
+        return new Function(`const \{${names}\} = this; return \`${templateString}\`;`).call(params);
     }
 
     private printLogMessage(logLevel: string, logMessage: string, showConsoleColors: boolean, formattedArguments: any) {
@@ -95,11 +98,9 @@ class VueLogger implements ILogger {
         return {
             isEnabled: true,
             logLevel: LogLevels.DEBUG,
-            separator: "|",
             showConsoleColors: false,
-            showLogLevel: false,
-            showMethodName: false,
             stringifyArguments: false,
+            format: "${message} ${args.join(' | ')}",
         };
     }
 }

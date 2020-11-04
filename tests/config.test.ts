@@ -11,10 +11,8 @@ describe("isValidOptions()", () => {
             isEnabled: true,
             logLevel: "debug",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: true,
-            separator: "|",
             showConsoleColors: false,
+            format: "${methodName} ${message} ${args.join(' | ')}",
         } as any, logLevels);
         strictEqual(input, true);
     });
@@ -25,60 +23,32 @@ describe("isValidOptions()", () => {
             isEnabled: true,
             logLevel: "debug",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: true,
-            separator: "|||||",
-            showConsoleColors: false,
-        } as any, logLevels), false);
-
-        strictEqual(VueLogger.isValidOptions({
-            isEnabled: true,
-            logLevel: "debug",
-            stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: true,
-            separator: "|",
             showConsoleColors: "FOO",
+            format: "${message} ${args.join(' | ')}",
         } as any, logLevels), false);
 
         strictEqual(VueLogger.isValidOptions({
             isEnabled: true,
             logLevel: "debug",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: "TEST",
-            separator: "|",
             showConsoleColors: false,
+            format: 6,
         } as any, logLevels), false);
 
         strictEqual(VueLogger.isValidOptions({
             isEnabled: true,
             logLevel: "debug",
             stringifyArguments: "TEST",
-            showLogLevel: false,
-            showMethodName: false,
-            separator: "|",
             showConsoleColors: false,
-        } as any, logLevels), false);
-
-        strictEqual(VueLogger.isValidOptions({
-            isEnabled: true,
-            logLevel: "debug",
-            stringifyArguments: false,
-            showLogLevel: "TEST",
-            showMethodName: false,
-            separator: "|",
-            showConsoleColors: false,
+            format: "${message} ${args.join(' | ')}",
         } as any, logLevels), false);
 
         strictEqual(VueLogger.isValidOptions({
             isEnabled: true,
             logLevel: "TEST",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: false,
-            separator: "|",
             showConsoleColors: false,
+            format: "${message} ${args.join(' | ')}",
         } as any, logLevels), false);
 
         strictEqual(VueLogger.isValidOptions({
@@ -87,28 +57,9 @@ describe("isValidOptions()", () => {
         } as any, logLevels), true);
 
         strictEqual(VueLogger.isValidOptions({
-            isEnabled: "",
-            logLevel: "debug",
-            separator: "1234",
-        } as any, logLevels), false);
-
-        strictEqual(VueLogger.isValidOptions({
             isEnabled: true,
             logLevel: "debug",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: false,
-            separator: "|",
-            showConsoleColors: false,
-        } as any, logLevels), true);
-
-        strictEqual(VueLogger.isValidOptions({
-            isEnabled: false,
-            logLevel: "debug",
-            stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: false,
-            separator: "|",
             showConsoleColors: false,
         } as any, logLevels), true);
 
@@ -116,20 +67,16 @@ describe("isValidOptions()", () => {
             isEnabled: "",
             logLevel: "debug",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: false,
-            separator: "|",
             showConsoleColors: false,
+            format: "${message} ${args.join(' | ')}",
         } as any, logLevels), false);
 
         strictEqual(VueLogger.isValidOptions({
             isEnabled: null,
             logLevel: "debug",
             stringifyArguments: false,
-            showLogLevel: false,
-            showMethodName: false,
-            separator: "|",
             showConsoleColors: false,
+            format: "${message} ${args.join(' | ')}",
         } as any, logLevels), false);
     });
 });
