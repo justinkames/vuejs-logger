@@ -74,7 +74,7 @@ const options = {
     logLevel : isProduction ? 'error' : 'debug',
     stringifyArguments : false,
     showConsoleColors: true,
-    format: "${logLevel} | ${methodName} | ${message} ${args.join(' ')})",
+    format: "${logLevel} | ${methodName} | ${message} ${args.join(' ')}",
 };
 
 Vue.use(VueLogger, options);
