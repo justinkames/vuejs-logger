@@ -55,11 +55,6 @@ Below you can find an example of how to use vuejs-logger :
 
 #### Properties
 
-<style>
-table td:first-child > code {
-  white-space: nowrap;
-}
-</style>
 | Name      | Required | Type          | Default     | Description |
 | ---       | ---      | ---           | ---         | ---         |
 | isEnabled      | false  | Boolean |  `true `           | Enables the vuejs-logger plugin, useful toggle for production/development. |
