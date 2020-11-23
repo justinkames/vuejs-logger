@@ -23,7 +23,7 @@
     "ts-jest": "25.1.0",
     "typescript": "3.7.5",
     "chai": "4.2.0",
-    "codecov": "3.6.2"
+    "codecov": "3.7.1"
   },
   "dependencies": {
     "vue": "2.6.11",
