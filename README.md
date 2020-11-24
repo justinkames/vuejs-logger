@@ -57,13 +57,11 @@ Below you can find an example of how to use vuejs-logger :
 
 | Name      | Required | Type          | Default     | Description |
 | ---       | ---      | ---           | ---         | ---         |
-| isEnabled      | false  | Boolean |  true            | Enables the vuejs-logger plugin, useful toggle for production/development. |
-| logLevel     | false | String | 'debug'           | Choose between ['debug', 'info', 'warn', 'error', 'fatal']. Read [production tips](#production-tips). |
-| stringifyArguments | false | Boolean          | false       | If true, all input will go through JSON.stringify(). Useful when printing reactive properties.|
-| showLogLevel  | false | Boolean          | false       | If true, the loglevel will be shown. |
-| showMethodName | false | Boolean | false       | If true, the method name of the parent function will be shown in the console. |
-| separator | false | String | ' l '       | The seperator between parts of the output ( see [screenshot](#screenshot). |
-| showConsoleColors | false | Boolean | false       | If true, enables console.warn, console.fatal, console.error for corresponding loglevels. |
+| isEnabled      | false  | Boolean |  `true `           | Enables the vuejs-logger plugin, useful toggle for production/development. |
+| logLevel     | false | String | `"debug"`           | Choose between ['debug', 'info', 'warn', 'error', 'fatal']. Read [production tips](#production-tips). |
+| stringifyArguments | false | Boolean          | `false`       | If true, all input will go through JSON.stringify(). Useful when printing reactive properties.|
+| showConsoleColors | false | Boolean | `false`       | If true, enables console.warn, console.fatal, console.error for corresponding loglevels. |
+| format | false | String | <pre lang="js">"${message} ${args.join(' \| ')}"</pre> | Log message format template, using the template string syntax without backticks. The arguments `message`, `methodName`, `level` and `args` can be used. |
 
 #### Code example
 
@@ -75,10 +73,8 @@ const options = {
     isEnabled: true,
     logLevel : isProduction ? 'error' : 'debug',
     stringifyArguments : false,
-    showLogLevel : true,
-    showMethodName : true,
-    separator: '|',
-    showConsoleColors: true
+    showConsoleColors: true,
+    format: "${logLevel} | ${methodName} | ${message} ${args.join(' ')}",
 };
 
 Vue.use(VueLogger, options);
