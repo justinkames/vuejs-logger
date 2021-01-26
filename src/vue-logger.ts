@@ -12,7 +12,12 @@ class VueLogger implements ILogger {
 
         if (this.isValidOptions(options, this.logLevels)) {
             Vue.$log = this.initLoggerInstance(options, this.logLevels);
-            Vue.prototype.$log = Vue.$log;
+            
+            /*
+            ** Vue3 Compatibility Issue
+            */ 
+            // Vue.prototype.$log = Vue.$log;
+        
         } else {
             throw new Error(this.errorMessage);
         }
